@@ -7,8 +7,8 @@
 FROM openjdk:11
 ENV JVM_HEAP_GB=2
 WORKDIR /r5
-COPY build/libs/r5-all.jar .
-# Use a configuration that connects to the database on another host (container)
-COPY analysis.properties.docker analysis.properties
+COPY . .
+
 EXPOSE 7070
-CMD java -Xmx${JVM_HEAP_GB}g -cp r5-${R5_VERSION}-all.jar com.conveyal.analysis.BackendMain
+ENTRYPOINT ["java", "-Xmx2g", "-cp", "build/libs/r5-all.jar"]
+CMD ["com.conveyal.analysis.BackendMain"]
